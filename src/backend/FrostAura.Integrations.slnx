@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="FrostAura.Integrations.Api/FrostAura.Integrations.Api.csproj" />
+  <Project Path="FrostAura.Integrations.Core/FrostAura.Integrations.Core.csproj" />
+  <Project Path="FrostAura.Integrations.Tests/FrostAura.Integrations.Tests.csproj" />
+  <Project Path="FrostAura.Integrations.Woolworths/FrostAura.Integrations.Woolworths.csproj" />
+</Solution>

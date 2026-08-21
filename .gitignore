@@ -1,0 +1,13 @@
+bin/
+obj/
+*.user
+.vs/
+.idea/
+.DS_Store
+
+# Never commit credentials. This service is designed to hold none, and local
+# experiments must not be the exception that puts one in history.
+appsettings.Local.json
+*.env
+.env
+secrets.json

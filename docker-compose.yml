@@ -1,0 +1,15 @@
+# Local stack. Production runs the same image via a Portainer stack fronted by
+# Cloudflared, which terminates TLS for integrations.frostaura.net.
+services:
+  api:
+    build:
+      context: .
+      dockerfile: ./src/backend/Dockerfile
+    image: frostaura/fa-integrations:local
+    ports:
+      - "${API_PORT:-8080}:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Production}
+      # No provider credentials here by design — callers supply their own per
+      # request, so this container holds no secrets to leak.
+    restart: unless-stopped
