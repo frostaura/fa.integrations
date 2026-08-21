@@ -11,7 +11,7 @@ _Last verified: 2026-08-21 by direct inspection — build run, tests run, servic
 
 Created 2026-08-21 in the same session that reverse-engineered the Woolworths endpoints. It is the only project in the division built end to end inside a single session, and the only one whose first commit and last commit are the same day.
 
-**Repository: `frostaura/fa.integrations`, private, pushed.** Branch `main` tracks `origin/main`, working tree clean, no lock debris, reflog shows no resets. The three product commits (scaffold → verified-state record → the placeId fix) are pushed and 0 behind; the 2026-08-21 division audit added a fourth, context-only commit, so the branch reads **1 ahead**. All the code is off-machine — this is one of only two Technologies repos where that is true.
+**Repository: `frostaura/fa.integrations`, private, pushed.** Branch `main` tracks `origin/main`, working tree clean, no lock debris, reflog shows no resets. The three product commits (scaffold → verified-state record → the placeId fix) are pushed and 0 behind; the 2026-08-21 division audit added a context-only commit on top, so the branch is **ahead-only by context commits alone**. All the code is off-machine — this is one of only two Technologies repos where that is true.
 
 **Nothing is deployed.** There is no `integrations.frostaura.net` DNS record and no Cloudflared route; the hostnames in `CLAUDE.md` are intent, not a live service. The deploy blockers are their own topic.
 
