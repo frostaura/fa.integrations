@@ -104,11 +104,33 @@ vendor documentation exists for.
 ## Dependencies on other FrostAura projects
 None.
 
+## Skills
+
+From the installed Gaia plugins this headless service draws the mandated-stack
+baseline (e.g. `fa-engineering-default-tech-stack`) for the .NET shape and for
+the recorded no-database departure from it, the formal-testing capability for the
+test layers (e.g. `fa-engineering-testing`), the implementation capability for
+delivery (e.g. `fa-engineering-implementation`), and the **deploy-chain
+activation** capability (e.g. `fa-engineering-deploy-chain`) for the Docker Hub
+login this repo is stalled at — read it alongside the deploy-blockers topic in
+`MEMORY.md`. The UI-engineering capability does not apply; there is no frontend.
+
+**Reference a capability by what it does, and name the current skill as an example
+only — never as the identifier, never by path.** Plugin skills are not files in this
+repo, so nothing here links to them and no checker sees a rename; a bare name goes
+dead silently. Whether a named skill is installed today is a `MEMORY.md` question.
+
+This repo has **no local `.claude/skills/`**, has never had one, and must not acquire
+one. It is the only Technologies repo that was never vendored, and also the only one
+that showed no stack drift — that correlation is the argument, recorded at division
+level. A procedure that would be equally correct in an unrelated repository belongs
+upstream in a plugin.
+
 ## Upkeep
-This file, [`MEMORY.md`](MEMORY.md) and any local `.claude/skills/` are kept
-current **as changes land**, not in a later pass. `MEMORY.md` is required here
-exactly as `CLAUDE.md` is, and cascades downward identically; a `CLAUDE.md` with
-no `MEMORY.md` beside it is a defect.
+Three artifacts are kept current **as changes land**, not in a later pass: this file,
+[`MEMORY.md`](MEMORY.md) with its `memory/` topic store, and the skills layer above
+(empty by decision). `MEMORY.md` is required here exactly as `CLAUDE.md` is, and
+cascades downward identically; a `CLAUDE.md` with no `MEMORY.md` beside it is a defect.
 
 Update the memory store at the end of any session that shipped, decided,
 discovered or abandoned something — and its "not yet verified" section is the
