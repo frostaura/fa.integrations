@@ -207,18 +207,29 @@ verified rather than assumed: `SignOutAsync` follows the POST with a
 logging a warning otherwise. It never throws — a failed sign-out must not mask
 the result of the work that preceded it.
 
-### Delivery address — one-time, out of the per-run flow
+### Delivery address — `address.placeId` is REQUIRED on every add
 
-Adding food to a cart for the first time triggers an address-confirmation modal
-on the site. Once confirmed for the account, later adds do not need it. The
-relevant endpoints are `GET /server/savedAddress`,
+`cartAddItems` refuses every item with HTTP 200 and
+`formexceptions: [{message: "Place Id is missing."}]` unless the payload carries
+an `address.placeId` (a Google place id). A browser session doesn't hit this
+because the site's address-confirmation modal has already run `confirmPlace`;
+**a fresh headless session has no confirmed place, so the field is mandatory
+there**. This was discovered when the first end-to-end write through this
+service failed — the original traffic capture happened in a browser session
+where the modal had already fired, which hid the requirement.
+
+The integration resolves the placeId dynamically after sign-in:
+`GET /server/savedAddress` → the entry named by `defaultProfileAddressNickName`
+→ its `placeId`, falling back to the first saved address with a non-empty
+`placeId` (legacy entries can carry an empty one). The resolved value is then
+sent on every `cartAddItems` call.
+
+An account with **no** saved address cannot add items at all; the client fails
+those adds with an instruction to set a delivery address once at
+woolworths.co.za. The related endpoints
 `GET /server/validatePlace?addressNickname={nickname}` and
-`POST /server/confirmPlace`; `cartAddItems` also accepts an `address.placeId`
-alongside the items, which is how the site passes it straight from that modal.
-
-**None of this is implemented.** The integration assumes the account has already
-confirmed a delivery address. An account that has not will behave differently
-and that path is untested here.
+`POST /server/confirmPlace` (the modal's own flow) are deliberately not
+implemented — reading the saved address is sufficient and mutates nothing.
 
 ## Invariants
 
@@ -227,6 +238,7 @@ and that path is untested here.
 - Base64-encode the password; never log it in either form.
 - Send `filters[visibility]` twice.
 - Add exactly one cart item per request.
+- Include `address.placeId` on every `cartAddItems` call.
 - Check the response body — `errorMessage`, `formexceptions`, `loggedInStatus` —
   never the HTTP status, on every single call.
 - POST to log out, then verify.

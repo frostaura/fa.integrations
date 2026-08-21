@@ -33,6 +33,7 @@ public sealed class WoolworthsClient : IDisposable
     private readonly HttpClientHandler _handler;
     private readonly ILogger _log;
     private bool _signedIn;
+    private string? _placeId;
 
     public WoolworthsClient(ILogger logger)
     {
@@ -117,7 +118,43 @@ public sealed class WoolworthsClient : IDisposable
 
         _signedIn = true;
         _log.LogInformation("Signed in to Woolworths as profile {ProfileId}", profileId);
+
+        // cartAddItems refuses everything with "Place Id is missing." unless the
+        // request carries a delivery placeId — a fresh headless session has no
+        // confirmed place, unlike a browser session that has been through the
+        // address modal. Resolve the account's default saved address up front.
+        _placeId = await FetchDefaultPlaceIdAsync(ct);
+        if (_placeId is null)
+            _log.LogWarning("Woolworths account has no saved address with a place id; cart adds will fail.");
+
         return profileId;
+    }
+
+    /// <summary>
+    /// The placeId of the account's default saved address, or the first saved
+    /// address that has one. Null when the account has never set an address.
+    /// </summary>
+    private async Task<string?> FetchDefaultPlaceIdAsync(CancellationToken ct)
+    {
+        using var req = Request(HttpMethod.Get, "/server/savedAddress");
+        using var res = await _http.SendAsync(req, ct);
+        var json = await ReadJsonAsync(res, ct);
+
+        if (json?["addresses"] is not JsonObject addresses) return null;
+
+        var defaultNickname = json["defaultProfileAddressNickName"]?.GetValue<string>();
+
+        string? fallback = null;
+        foreach (var (nickname, address) in addresses)
+        {
+            var placeId = address?["placeId"]?.GetValue<string>();
+            if (string.IsNullOrWhiteSpace(placeId)) continue; // legacy entries carry an empty placeId
+
+            if (nickname == defaultNickname) return placeId;
+            fallback ??= placeId;
+        }
+
+        return fallback;
     }
 
     /// <summary>
@@ -132,10 +169,18 @@ public sealed class WoolworthsClient : IDisposable
     {
         EnsureSignedIn();
 
+        if (_placeId is null)
+        {
+            return new AddItemOutcome(false,
+                "This Woolworths account has no saved delivery address, so items cannot be added. "
+                + "Set a delivery address once at woolworths.co.za and try again.", null, null);
+        }
+
         using var req = Request(HttpMethod.Post, "/server/cartAddItems", new
         {
             deliveryType = "Standard",
             fromDeliverySelectionPopup = "true",
+            address = new { placeId = _placeId },
             items = new[]
             {
                 new
