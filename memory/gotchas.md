@@ -1,7 +1,7 @@
 ---
 name: fa-integrations-gotchas
 description: "MSBuildEnableWorkloadResolver=false is mandatory in this checkout; dotnet new exits 73 while succeeding; upstream returns HTTP 200 for every kind of failure"
-type: reference
+type: gotcha
 last_verified: 2026-08-21
 ---
 
@@ -37,4 +37,4 @@ not the status code. A green call proved the request was accepted, not that it
 did anything.
 
 ## Related
-[[fa-integrations-state]] · [[fa-integrations-decisions]]
+[Current state](state.md) · [Decisions](decisions.md)

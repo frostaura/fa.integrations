@@ -5,8 +5,10 @@ A stateless integration gateway that exposes third-party consumer services as
 both a REST API and a remote MCP server, so the same capability is reachable by
 a Siri Shortcut, a script, or an AI agent without writing it twice. The first
 integration drives Woolworths South Africa: search the grocery catalogue and
-fill the customer's cart from a shared shopping list. Public surface is
-`integrations.frostaura.net/api` and `integrations.frostaura.net/mcp`.
+fill the customer's cart from a shared shopping list. The intended public
+surface is `integrations.frostaura.net/api` and `integrations.frostaura.net/mcp`
+— whether that hostname resolves yet is a question for `MEMORY.md`, not this
+file.
 
 ## Architecture & key concepts
 Four projects under `src/backend/`:
@@ -43,7 +45,9 @@ can never serve another's call.
 .NET 10 minimal API, `ModelContextProtocol.AspNetCore` for the MCP surface.
 No database and no EF Core: the service is stateless by design and has nothing
 to persist. That is a deliberate departure from the division default, recorded
-as a decision in `MEMORY.md`. No frontend. No repo yet.
+as a decision in `MEMORY.md`. No frontend — the division's `src/frontend/`
+convention does not apply to a headless service. Repo:
+`https://github.com/frostaura/fa.integrations` (`main`), private.
 
 ## Conventions & non-obvious rules
 - **Add cart items one request at a time.** Woolworths' `cartAddItems` accepts an
@@ -101,11 +105,16 @@ vendor documentation exists for.
 None.
 
 ## Upkeep
-This file and [`MEMORY.md`](MEMORY.md) are kept current as changes land, not in
-a later pass. `MEMORY.md` is updated at the end of any session that shipped,
-decided, discovered or abandoned something — and its "not yet verified" section
-is the first thing to correct once a claim there becomes true. This file changes
-only when a rule changes; a status belongs in `MEMORY.md`. Upstream behaviour
-that turns out to differ from what `docs/architecture/` records is a blocking
-defect: fix the doc in the same change as the code. The standard is
+This file, [`MEMORY.md`](MEMORY.md) and any local `.claude/skills/` are kept
+current **as changes land**, not in a later pass. `MEMORY.md` is required here
+exactly as `CLAUDE.md` is, and cascades downward identically; a `CLAUDE.md` with
+no `MEMORY.md` beside it is a defect.
+
+Update the memory store at the end of any session that shipped, decided,
+discovered or abandoned something — and its "not yet verified" section is the
+first thing to correct once a claim there becomes true. Restamp `last_verified:`
+only for what you actually inspected. This file changes only when a rule
+changes; a status belongs in `MEMORY.md`. Upstream behaviour that turns out to
+differ from what `docs/architecture/` records is a blocking defect: fix the doc
+in the same change as the code. The standard is
 [`/docs/operating/context-cascade.md`](../../../docs/operating/context-cascade.md).

@@ -1,7 +1,7 @@
 ---
 name: fa-integrations-decisions
 description: "No DB (stateless, so no credential store exists to compromise); per-request header credentials; one cart item per request forced by upstream; Woolworths first behind an IIntegration seam"
-type: decisions
+type: decision
 last_verified: 2026-08-21
 ---
 
@@ -48,4 +48,4 @@ auth scheme. This is not speculative generality: it is why the project is called
 credential resolution need no central registry to keep in sync.
 
 ## Related
-[[fa-integrations-state]] · [[fa-integrations-questions]]
+[Current state](state.md) · [Open questions](questions.md)

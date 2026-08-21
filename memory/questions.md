@@ -1,7 +1,7 @@
 ---
 name: fa-integrations-questions
 description: "Does a headless-filled cart show in the Woolworths app; no rate limiting on a third-party key that is not ours; no agreement or notice channel with Woolworths at all"
-type: questions
+type: question
 last_verified: 2026-08-21
 ---
 
@@ -41,4 +41,4 @@ but an AI agent calling it will silently mutate a real cart. The
 require a confirmation token is undecided.
 
 ## Related
-[[fa-integrations-state]] · [[fa-integrations-decisions]]
+[Current state](state.md) · [Decisions](decisions.md)
