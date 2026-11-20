@@ -1,5 +1,5 @@
 ---
-name: fa-integrations-decisions
+name: technologies-fa-integrations-decisions
 description: "No DB (stateless, so no credential store exists to compromise); per-request header credentials; one cart item per request forced by upstream; Woolworths first behind an IIntegration seam"
 type: decision
 last_verified: 2026-08-21

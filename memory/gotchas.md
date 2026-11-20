@@ -1,5 +1,5 @@
 ---
-name: fa-integrations-gotchas
+name: technologies-fa-integrations-gotchas
 description: "MSBuildEnableWorkloadResolver=false is mandatory in this checkout; dotnet new exits 73 while succeeding; upstream returns HTTP 200 for every kind of failure"
 type: gotcha
 last_verified: 2026-08-21
@@ -23,7 +23,7 @@ error link, having created every file correctly. Check the filesystem before
 concluding the command failed and re-running it.
 
 ## The solution is `.slnx`
-The newer XML solution format, same as `fa.guild`. Tooling expecting `.sln`
+The newer XML solution format. Tooling expecting `.sln`
 will not find it.
 
 ## Upstream returns HTTP 200 for failures

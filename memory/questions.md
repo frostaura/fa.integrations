@@ -1,5 +1,5 @@
 ---
-name: fa-integrations-questions
+name: technologies-fa-integrations-questions
 description: "Does a headless-filled cart show in the Woolworths app; no rate limiting on a third-party key that is not ours; no agreement or notice channel with Woolworths at all"
 type: question
 last_verified: 2026-08-21

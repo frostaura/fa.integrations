@@ -65,7 +65,7 @@ const ok = (name, cond, detail = "") => {
 };
 
 async function connect(headers = {}) {
-  const client = new Client({ name: "fa-integrations-qa", version: "1.0.0" });
+  const client = new Client({ name: "technologies.fa.integrations-qa", version: "1.0.0" });
   await client.connect(new StreamableHTTPClientTransport(URL_, { requestInit: { headers } }));
   return client;
 }

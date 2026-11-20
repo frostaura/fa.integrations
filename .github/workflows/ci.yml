@@ -113,7 +113,7 @@ jobs:
           file: ./src/backend/Dockerfile
           push: true
           platforms: linux/amd64
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/fa-integrations:latest-amd64
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/technologies.fa.integrations:latest-amd64
 
   build-arm64:
     name: Build (arm64)
@@ -141,7 +141,7 @@ jobs:
           file: ./src/backend/Dockerfile
           push: true
           platforms: linux/arm64
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/fa-integrations:latest-arm64
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/technologies.fa.integrations:latest-arm64
 
   merge-manifests:
     name: Create Multi-arch Manifest
@@ -160,9 +160,9 @@ jobs:
 
       - name: Create and push manifest
         run: |
-          docker buildx imagetools create -t ${{ secrets.DOCKERHUB_USERNAME }}/fa-integrations:latest \
-            ${{ secrets.DOCKERHUB_USERNAME }}/fa-integrations:latest-amd64 \
-            ${{ secrets.DOCKERHUB_USERNAME }}/fa-integrations:latest-arm64
+          docker buildx imagetools create -t ${{ secrets.DOCKERHUB_USERNAME }}/technologies.fa.integrations:latest \
+            ${{ secrets.DOCKERHUB_USERNAME }}/technologies.fa.integrations:latest-amd64 \
+            ${{ secrets.DOCKERHUB_USERNAME }}/technologies.fa.integrations:latest-arm64
 
   # ============================================================================
   # Deploy — tell Portainer to re-pull the freshly manifested image

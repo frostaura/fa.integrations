@@ -1,4 +1,9 @@
-# Integrations — `fa.integrations`
+# Integrations — `technologies.fa.integrations`
+
+**Retired.** This repository is kept for provenance only; its capability lives in
+`frostaura/technologies.fa.gaia`, and that is where any change to the Woolworths
+integration belongs. Do not deploy, extend or revive it here. When and why it was
+retired is in `MEMORY.md`.
 
 ## What this project is
 A stateless integration gateway that exposes third-party consumer services as
@@ -47,7 +52,7 @@ No database and no EF Core: the service is stateless by design and has nothing
 to persist. That is a deliberate departure from the division default, recorded
 as a decision in `MEMORY.md`. No frontend — the division's `src/frontend/`
 convention does not apply to a headless service. Repo:
-`https://github.com/frostaura/fa.integrations` (`main`), private.
+`https://github.com/frostaura/technologies.fa.integrations` (`main`).
 
 ## Conventions & non-obvious rules
 - **Add cart items one request at a time.** Woolworths' `cartAddItems` accepts an

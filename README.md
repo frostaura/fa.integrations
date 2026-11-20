@@ -1,4 +1,6 @@
-# FrostAura Integrations
+> **Retired 2026-08-21.** This project is no longer maintained or deployed. Its capability — the Woolworths integration, the REST endpoints and the MCP tools — lives on in [`frostaura/technologies.fa.gaia`](https://github.com/frostaura/technologies.fa.gaia). This repository is kept public for provenance only.
+
+# FrostAura Integrations — `technologies.fa.integrations`
 
 A stateless gateway that exposes third-party consumer services as **both** a
 REST API and a **remote MCP server**, so the same capability is reachable by a
@@ -9,7 +11,7 @@ Siri Shortcut, a script, or an AI agent without being written twice.
 
 > Operating context for agents is in [`CLAUDE.md`](CLAUDE.md); current state,
 > decisions and known traps are in [`MEMORY.md`](MEMORY.md). Neither hostname
-> above is live yet.
+> above was ever made live, and since the retirement neither ever will be.
 
 ## The idea
 
@@ -60,6 +62,8 @@ order or move money.
 ## Running it
 
 ```bash
+gh repo clone frostaura/technologies.fa.integrations
+cd technologies.fa.integrations
 make build   # restore + build
 make test    # xUnit suite
 make run     # local API on :5199

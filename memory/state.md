@@ -1,17 +1,19 @@
 ---
-name: fa-integrations-state
-description: "Private repo pushed, 1 context commit ahead; write path proven via a real MCP client 9/9 after the placeId bug was caught and fixed; nothing deployed — see the deploy blockers"
+name: technologies-fa-integrations-state
+description: "Retired 2026-08-21, capability moved whole into technologies.fa.gaia; repo renamed and public, kept for provenance; write path was proven 9/9; never deployed"
 type: state
-last_verified: 2026-08-21
+last_verified: 2026-11-20
 ---
 
 # Current state
+
+**Retired 2026-08-21 by founder decision.** The capability — the Woolworths integration, the REST endpoints, the MCP tools, the parser tests and the docs — was migrated whole into Gaia (`frostaura/technologies.fa.gaia`) rather than run as a second hosted service with a second deploy chain for one integration. **Why:** one integration did not justify its own service; the work itself was sound. On 2026-11-20 the repo was renamed from `frostaura/fa.integrations` to `frostaura/technologies.fa.integrations` and made public, and verified public by `gh repo view`. The rest of this topic is the state as last verified before retirement, kept for provenance.
 
 _Last verified: 2026-08-21 by direct inspection — build run, tests run, service started locally and in a container, every endpoint below called against the live Woolworths catalogue, and git state re-checked against the remote (re-confirmed by the division audit later the same day)._
 
 Created 2026-08-21 in the same session that reverse-engineered the Woolworths endpoints. It is the only project in the division built end to end inside a single session, and the only one whose first commit and last commit are the same day.
 
-**Repository: `frostaura/fa.integrations`, private, pushed.** Branch `main` tracks `origin/main`, no lock debris, reflog shows no resets. The working tree is not quite clean: `CLAUDE.md` carries one uncommitted edit from the 2026-08-21 context passes. This is the only repo in the division that never carried a vendored Gaia set, so it is also the only one without the large staged deletion the other four have. The three product commits (scaffold → verified-state record → the placeId fix) are pushed and 0 behind; the 2026-08-21 division audit added a context-only commit on top, so the branch is **ahead-only by context commits alone**. All the code is off-machine — this is one of only two Technologies repos where that is true.
+**Repository (as of 2026-08-21, before the rename): `frostaura/fa.integrations`, private, pushed.** Branch `main` tracks `origin/main`, no lock debris, reflog shows no resets. The working tree is not quite clean: `CLAUDE.md` carries one uncommitted edit from the 2026-08-21 context passes. This is the only repo in the division that never carried a vendored Gaia set, so it is also the only one without the large staged deletion the other four have. The three product commits (scaffold → verified-state record → the placeId fix) had been pushed and nothing was behind; the 2026-08-21 division audit added a context-only commit on top, so the branch is **ahead-only by context commits alone**. All the code is off-machine — this is one of only two Technologies repos where that is true.
 
 **Nothing is deployed.** There is no `integrations.frostaura.net` DNS record and no Cloudflared route; the hostnames in `CLAUDE.md` are intent, not a live service. The deploy blockers are their own topic.
 
